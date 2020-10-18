@@ -2,10 +2,9 @@
 <h3 align="center">JSON Web Token Service</h3>
 <p align="center">
   A microservice based Spring Boot API
-  <img src="http://jasontokarski.com/wp/Images/JWTKEY.png" alt="drawing" width="175px" height="75px"/>
   <br />
-  <a href="https://github.com/jasontokarski/JwtProvider">
-  </a>
+  <img src="http://jasontokarski.com/wp/Images/JWTKEY.png" alt="drawing" width="175px" height="75px"/>
+  <a href="https://github.com/jasontokarski/JwtProvider"></a>
 
   <p align="center">
     <br />
