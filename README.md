@@ -38,9 +38,10 @@ Available Capabilities:
 * A RESTful based approach to generating tokens through HTTP requests.
 * Validating the authenticity of tokens.
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue.
+This project was built using JDK 11, please install this version or a later one. 
+You will also need to have gradle installed on your system in order to build the service.
 
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
+This is a fast, lightweight, secure service for authenticating users for a front end login page or allowing access to downstream applications.
 
 ### Built With
 This application was written in Java.
