@@ -60,7 +60,7 @@ After starting the Spring Boot application, two endpoints are available. One for
 
 MySQL Server
 Download [MySQL Server 8](https://dev.mysql.com/downloads/mysql/)
-* Login to your MySQL database and run the following commands
+* Login to your MySQL server and run the following commands
 ```mysql
 CREATE DATABASE jwt_provider;
 CREATE USER 'authuser'@'%' IDENTIFIED BY 'yourpasswordhere';
