@@ -1,11 +1,10 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
+  <img src="http://jasontokarski.com/wp/Images/JWTKEY.png" alt="drawing" width="250px" height="100px"/>
+  <br />
   <a href="https://github.com/jasontokarski/JwtProvider>
-    <img src="http://jasontokarski.com/wp/Images/JWTKEY.png" alt="Logo" width="100" height="100"></img>
   </a>
-
-  <h3 align="center">JWT Token Service</h3>
 
   <p align="center">
     A microservice based Spring Boot API
