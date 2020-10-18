@@ -1,5 +1,4 @@
 <!-- PROJECT LOGO -->
-<br />
 <h3 align="center">JSON Web Token Service</h3>
 <p align="center">
   <img src="http://jasontokarski.com/wp/Images/JWTKEY.png" alt="drawing" width="175px" height="75px"/>
