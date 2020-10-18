@@ -45,10 +45,10 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
+Available Capabilities:
+* The ability to stand-up a JSON Web Token microservice on any platform running JDK.
+* A RESTful based approach to generating tokens through HTTP requests.
+* Validating the authenticity of tokens.
 
 Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue.
 
@@ -56,21 +56,22 @@ A list of commonly used resources that I find helpful are listed in the acknowle
 
 ### Built With
 This application was written in Java.
-* [Spring Boot](https://)
-* [Hibernate](https://)
-* [MySQL](https://)
-
-
+* [Spring Boot](https://https://spring.io/guides/gs/spring-boot/)
+* [Hibernate](https://hibernate.org/)
+* [MySQL](https://www.mysql.com/)
+* [Gradle](https://gradle.org/)
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+JwtProvider uses Gradle for depedency management and building the application. This gradle project also has a set of JUnit test cases and Jacoco coverage reports.
+This application will require a MySQL or other RDBMS SQL server where pairs of users and their API keys are stored to prevent unauthorized access to the JWT generator.
+After starting the Spring Boot application, two endpoints are available. One for token generation and another for token validation.
 
 ### Prerequisites
 
 MySQL Server
+Download [MySQL Server 8](https://dev.mysql.com/downloads/mysql/)
 * npm
 ```sh
 npm install npm@latest -g
