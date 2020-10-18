@@ -3,7 +3,7 @@
 <p align="center">
   <img src="http://jasontokarski.com/wp/Images/JWTKEY.png" alt="drawing" width="175px" height="75px"/>
   <br />
-  <a href="https://github.com/jasontokarski/JwtProvider>
+  <a href="https://github.com/jasontokarski/JwtProvider">
   </a>
 
   <p align="center">
