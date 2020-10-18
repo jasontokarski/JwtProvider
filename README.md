@@ -1,8 +1,8 @@
 <!-- PROJECT LOGO -->
 <br />
-<h2 align="center">JSON Web Token Service</h2>
+<h3 align="center">JSON Web Token Service</h3>
 <p align="center">
-  <img src="http://jasontokarski.com/wp/Images/JWTKEY.png" alt="drawing" width="250px" height="100px"/>
+  <img src="http://jasontokarski.com/wp/Images/JWTKEY.png" alt="drawing" width="175px" height="75px"/>
   <br />
   <a href="https://github.com/jasontokarski/JwtProvider>
   </a>
@@ -33,8 +33,6 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 Available Capabilities:
 * The ability to stand-up a JSON Web Token microservice on any platform running JDK.
