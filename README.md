@@ -91,7 +91,49 @@ java -jar provider-0.0.1-SNAPSHOT.jar
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Here is an example demonstration of this web application through Postman.
+**Request:**
+```json
+POST /jwt/request
+Accept: application/json
+Content-Type: application/json
+
+{
+    "user":"testuser123",
+    "apiKey":"apikey408374"
+}
+```
+**Successful Response:**
+```json
+HTTP/1.1 200 OK
+Server: localhost
+Content-Type: application/json
+
+eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlcjEyMyIsImlhdCI6MTYwMzA1ODYzOSwiaXNzIjoiWVd4cWEzTmtabXBzWVhOa2EyRXdhbVE1WmpCcVlXWXdPV293Wm1Fd09XcG1NRGxxTUdGaCIsImV4cCI6MTYwMzE0NTAzOX0.Zse87DkFCxk0FrnzHBJ8eemwBYH-N2lDExf48bSev0Y
+```
+
+**Request:**
+```json
+POST /jwt/validate
+Accept: application/json
+Content-Type: application/json
+
+{
+"jwt":"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYWludXNlciIsImlhdCI6MTYwMjcyNDIxNSwiaXNzIjoiWVd4cWEzTmtabXBzWVhOa2EyRXdhbVE1WmpCcVlXWXdPV293Wm1Fd09XcG1NRGxxTUdGaCIsImV4cCI6MTYwMjgxMDYxNX0.44RQJ-S6DSaWkuYJZc7UJEv8P5QC_PDPKoVTdojsF20"
+}
+```
+**Successful Response:**
+```json
+HTTP/1.1 200 OK
+Server: localhost
+Content-Type: application/json
+```
+
+**Failed Response:**
+```json
+HTTP/1.1 401 Unauthorized
+Server: localhost
+Content-Type: application/json
+``` 
 
 _For more examples, please refer to the [Documentation](https://jasontokarski.com)_
 
