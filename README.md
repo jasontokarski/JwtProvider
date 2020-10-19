@@ -34,7 +34,7 @@
 
 Available Capabilities:
 * The ability to stand-up a JSON Web Token microservice on any platform running JDK.
-* A RESTful based approach to generating tokens through HTTP requests.
+* A RESTful based approach to generating tokens through an HTTP based API.
 * Validating the authenticity of tokens.
 
 This project was built using JDK 11, please install this version or a later one. 
@@ -54,7 +54,7 @@ This application was written in Java.
 
 JwtProvider uses Gradle for depedency management and building the application. This gradle project also has a set of JUnit test cases and Jacoco coverage reports.
 This application will require a MySQL or other RDBMS SQL server where pairs of users and their API keys are stored to prevent unauthorized access to the JWT generator.
-After starting the Spring Boot application, two endpoints are available. One for token generation and another for token validation.
+Verify an SQL server is running before building or starting the application. After running the Spring Boot application, two endpoints are available. One for token generation and another for token validation.
 
 ### Prerequisites
 
