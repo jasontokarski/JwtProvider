@@ -13,6 +13,7 @@ import com.jwt.provider.repository.JwtRepository;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
@@ -43,7 +44,7 @@ public class JwtServiceImpl implements JwtService {
     
     @Override
     public Optional<AuthEntity> findByUser(String user) {
-        return jwtRepository.findByUser(user);
+        return jwtRepository.findByUserName(user);
     }
 
     @Override
@@ -75,7 +76,7 @@ public class JwtServiceImpl implements JwtService {
         if(authEntity.getApiKey() == null || authEntity.getApiKey().isEmpty()) {
             return false;
         }
-        Optional<AuthEntity> authEntityLookup = findByUser(authEntity.getUser());
+        Optional<AuthEntity> authEntityLookup = findByUser(authEntity.getUserName());
         return (authEntityLookup.isPresent() && authEntity.getApiKey().equals(authEntityLookup.get().getApiKey()));
     }
 
@@ -88,6 +89,17 @@ public class JwtServiceImpl implements JwtService {
             System.out.println(e.getMessage());
             return false;
         }
+    }
+
+    @Override
+    public Optional<String> save(AuthEntity authEntity) {
+        try {
+            jwtRepository.save(authEntity);
+        } catch(DataIntegrityViolationException e) {
+            e.printStackTrace();
+            return Optional.ofNullable(null);
+        }
+        return Optional.of(createToken(authEntity.getUserName()));
     }
 
     

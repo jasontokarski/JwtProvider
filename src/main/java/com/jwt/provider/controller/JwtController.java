@@ -1,6 +1,10 @@
 package com.jwt.provider.controller;
 
+import java.util.Optional;
+
 import com.jwt.provider.model.AuthEntity;
+import com.jwt.provider.model.StatusEntity;
+import com.jwt.provider.model.TokenEntity;
 import com.jwt.provider.service.JwtService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +24,11 @@ public class JwtController {
 
     @PostMapping(value = "/jwt/request", headers = "Accept=application/json")
     @ResponseBody
-    public ResponseEntity<String> retrieveJwt(@RequestBody AuthEntity authEntity) {
+    public ResponseEntity<JSONObject> retrieveJwt(@RequestBody AuthEntity authEntity) {
         if(jwtService.isAuthorized(authEntity)) {
-            return new ResponseEntity<>(jwtService.createToken(authEntity.getUser()), HttpStatus.OK);
+            JSONObject jwtObject = new JSONObject();
+            jwtObject.put("token", jwtService.createToken(authEntity.getUserName()));
+            return new ResponseEntity<>(jwtObject, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
@@ -32,10 +38,21 @@ public class JwtController {
     @ResponseBody
     public ResponseEntity<?> validateJwt(@RequestBody String jwt) {
         JSONObject jwtObject = new JSONObject(jwt);
-        if(jwtService.isValidToken(jwtObject.getString("jwt"))) {
+        if(jwtService.isValidToken(jwtObject.getString("token"))) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    @PostMapping(value = "/jwt/add-user", headers = "Accept=application/json")
+    @ResponseBody
+    public ResponseEntity<?> validateJwt(@RequestBody AuthEntity authEntity) {
+        Optional<String> jwt = jwtService.save(authEntity);
+        if(jwt.isPresent()) {
+            return new ResponseEntity<>(new TokenEntity(jwt.get(), authEntity, new StatusEntity("User added successfully.", 0 ,0)), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new StatusEntity("User already exists.", 0 , 2), HttpStatus.CONFLICT);
         }
     }
 }

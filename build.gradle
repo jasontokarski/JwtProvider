@@ -25,6 +25,11 @@ dependencies {
 	}
 }
 
+jar {
+    baseName = 'jwt-provider'
+    version =  '0.1.0'
+}
+
 test {
 	useJUnitPlatform()
 	finalizedBy jacocoTestReport // report is always generated after tests run

@@ -9,15 +9,15 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "user"))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = "user_name"))
 public class AuthEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "user")
-    private String user;
+    @Column(name = "user_name")
+    private String userName;
 
     @Column(name = "api_key")
     private String apiKey;
@@ -26,17 +26,17 @@ public class AuthEntity {
 
     }
 
-    public AuthEntity(String user, String apiKey) {
-        this.user = user;
+    public AuthEntity(String userName, String apiKey) {
+        this.userName = userName;
         this.apiKey = apiKey;
     }
 
-    public String getUser() {
-        return user;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getApiKey() {

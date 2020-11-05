@@ -54,7 +54,7 @@ public class JwtControllerTest {
 
     @BeforeEach
     public void init() {
-        if(!jwtRepository.existsAuthEntityByUser("testuser123")) {
+        if(!jwtRepository.existsAuthEntityByUserName("testuser123")) {
             jwtRepository.save(new AuthEntity("testuser123", "apikey408374"));
         }
     }

@@ -12,5 +12,6 @@ public interface JwtService {
     public boolean isValidToken(String jwt);
     public String createToken(String subject);
     public Claims decodeToken(String jwt);
+    public Optional<String> save(AuthEntity authEntity);
 
 }
