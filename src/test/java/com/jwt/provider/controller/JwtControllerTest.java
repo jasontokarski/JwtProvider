@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jwt.provider.model.AuthEntity;
+import com.jwt.provider.model.TokenEntity;
 import com.jwt.provider.repository.JwtRepository;
 import com.jwt.provider.service.JwtService;
 
@@ -74,7 +75,8 @@ public class JwtControllerTest {
         MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.post("/jwt/request").contentType("application/json").accept("application/json").content(objectMapper.writeValueAsString(new AuthEntity("testuser123", "apikey408374"))))
             .andExpect(status().isOk()).andReturn();
         String jwtToken = mvcResult.getResponse().getContentAsString();
-        assertThat(jwtToken).isEqualTo(expectedJwtToken);
+        TokenEntity tokenEntity = new ObjectMapper().readValue(jwtToken, TokenEntity.class);
+        assertThat(tokenEntity.getToken()).isEqualTo(expectedJwtToken);
     }
 
     @Test
@@ -103,22 +105,25 @@ public class JwtControllerTest {
 
     @Test
     public void validJwtRequest() throws Exception {
+        jwtService.setClock(Clock.systemDefaultZone());
         MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.post("/jwt/request").contentType("application/json").accept("application/json").content(objectMapper.writeValueAsString(new AuthEntity("testuser123", "apikey408374"))))
             .andExpect(status().isOk()).andReturn();
         String jwtToken = mvcResult.getResponse().getContentAsString();
-        String validJwtToken = "{\"jwt\":\"" + jwtToken + "\"}";
+        TokenEntity tokenEntity = new ObjectMapper().readValue(jwtToken, TokenEntity.class);
+        String validJwtToken = "{\"token\":\"" + tokenEntity.getToken() + "\"}";
         this.mockMvc.perform(MockMvcRequestBuilders.post("/jwt/validate").contentType("application/json").accept("application/json").content(validJwtToken))
             .andExpect(status().isOk());
     }
 
     @Test
     public void InvalidJwtRequest() throws Exception {
+        jwtService.setClock(Clock.systemDefaultZone());
         MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.post("/jwt/request").contentType("application/json").accept("application/json").content(objectMapper.writeValueAsString(new AuthEntity("testuser123", "apikey408374"))))
             .andExpect(status().isOk()).andReturn();
         String jwtToken = mvcResult.getResponse().getContentAsString();
-        jwtToken = jwtToken.substring(0, jwtToken.length()-1);
-        String validJwtToken = "{\"jwt\":\"" + jwtToken + "\"}";
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/jwt/validate").contentType("application/json").accept("application/json").content(validJwtToken))
+        TokenEntity tokenEntity = new ObjectMapper().readValue(jwtToken, TokenEntity.class);
+        String invalidJwtToken = "{\"token\":\"" + tokenEntity.getToken().substring(1) + "\"}";
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/jwt/validate").contentType("application/json").accept("application/json").content(invalidJwtToken))
             .andExpect(status().isUnauthorized());
     }
 

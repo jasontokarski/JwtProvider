@@ -22,26 +22,36 @@ public class JwtController {
     @Autowired
     private JwtService jwtService;
 
+    @Autowired
+    private TokenEntity tokenEntity;
+
+    @Autowired
+    private StatusEntity statusEntity;
+
     @PostMapping(value = "/jwt/request", headers = "Accept=application/json")
     @ResponseBody
-    public ResponseEntity<JSONObject> retrieveJwt(@RequestBody AuthEntity authEntity) {
+    public ResponseEntity<?> retrieveJwt(@RequestBody AuthEntity authEntity) {
         if(jwtService.isAuthorized(authEntity)) {
-            JSONObject jwtObject = new JSONObject();
-            jwtObject.put("token", jwtService.createToken(authEntity.getUserName()));
-            return new ResponseEntity<>(jwtObject, HttpStatus.OK);
+            statusEntity.setStatus("Token Retrieval Successful.");
+            statusEntity.setMajorCode(0);
+            statusEntity.setMinorCode(0);
+            tokenEntity.setToken(jwtService.createToken(authEntity.getUserName()));
+            tokenEntity.setAuthEntity(authEntity);
+            tokenEntity.setStatusEntity(statusEntity);
+            return ResponseEntity.ok().body(tokenEntity);
         } else {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 
     @PostMapping(value = "/jwt/validate", headers = "Accept=application/json")
     @ResponseBody
-    public ResponseEntity<?> validateJwt(@RequestBody String jwt) {
-        JSONObject jwtObject = new JSONObject(jwt);
+    public ResponseEntity<?> validateJwt(@RequestBody String token) {
+        JSONObject jwtObject = new JSONObject(token);
         if(jwtService.isValidToken(jwtObject.getString("token"))) {
-            return new ResponseEntity<>(HttpStatus.OK);
+            return ResponseEntity.status(HttpStatus.OK).build();
         } else {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 
@@ -50,9 +60,18 @@ public class JwtController {
     public ResponseEntity<?> validateJwt(@RequestBody AuthEntity authEntity) {
         Optional<String> jwt = jwtService.save(authEntity);
         if(jwt.isPresent()) {
-            return new ResponseEntity<>(new TokenEntity(jwt.get(), authEntity, new StatusEntity("User added successfully.", 0 ,0)), HttpStatus.OK);
+            statusEntity.setStatus("User added successfully.");
+            statusEntity.setMajorCode(0);
+            statusEntity.setMinorCode(0);
+            tokenEntity.setToken(jwt.get());
+            tokenEntity.setAuthEntity(authEntity);
+            tokenEntity.setStatusEntity(statusEntity);
+            return ResponseEntity.ok().body(tokenEntity);
         } else {
-            return new ResponseEntity<>(new StatusEntity("User already exists.", 0 , 2), HttpStatus.CONFLICT);
+            statusEntity.setStatus("User added successfully.");
+            statusEntity.setMajorCode(0);
+            statusEntity.setMinorCode(0);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(statusEntity);
         }
     }
 }

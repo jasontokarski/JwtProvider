@@ -5,8 +5,6 @@ public class TokenEntity {
     private AuthEntity authEntity;
     private StatusEntity statusEntity;
 
-
-
     public TokenEntity() {
     }
 

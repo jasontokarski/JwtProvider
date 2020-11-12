@@ -4,6 +4,7 @@ import com.jwt.provider.model.AuthEntity;
 
 import io.jsonwebtoken.Claims;
 
+import java.time.Clock;
 import java.util.Optional;
 
 public interface JwtService {
@@ -13,5 +14,5 @@ public interface JwtService {
     public String createToken(String subject);
     public Claims decodeToken(String jwt);
     public Optional<String> save(AuthEntity authEntity);
-
+    public void setClock(Clock clock);
 }

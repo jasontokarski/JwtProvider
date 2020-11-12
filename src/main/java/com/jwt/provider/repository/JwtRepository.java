@@ -10,6 +10,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Repository("jwtRepository")
 public interface JwtRepository extends JpaRepository<AuthEntity, Long> {
     Optional <AuthEntity> findByUserName(String userName);
-
 	boolean existsAuthEntityByUserName(String userName);
 }

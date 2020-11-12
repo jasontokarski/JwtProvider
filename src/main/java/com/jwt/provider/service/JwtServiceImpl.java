@@ -102,5 +102,7 @@ public class JwtServiceImpl implements JwtService {
         return Optional.of(createToken(authEntity.getUserName()));
     }
 
-    
+    public void setClock(Clock clock) {
+        this.clock = clock;
+    }
 }
