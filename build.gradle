@@ -9,6 +9,7 @@ group = 'com.jwt'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+
 repositories {
 	mavenCentral()
 }
@@ -20,6 +21,7 @@ dependencies {
 	compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.21'
 	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
 	compile group: 'org.json', name: 'json', version: '20200518'
+	implementation 'com.h2database:h2:1.4.200'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
